@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Scrollama: Sticky Side Example</title>
+    <meta name="description" content="Scrollama: Sticky Side Example" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+	<style>
+           #scrolly {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        background-color: #f3f3f3;
+        /* padding: 1rem; */
+      }
+
+      #scrolly > * {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      }
+	  #scrolly2 {
+      position: -webkit-sticky;
+    position: sticky;
+    float: right;
+    top: 0;
+    right: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+      }
+
+      #scrolly2 > * {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      }
+
+      article {
+        position: relative;
+      }
+	  #map { position: absolute; top: 0; bottom: 0; width: 100%; height:100%}
+
+
+      figure {
+        position: -webkit-sticky;
+        position: sticky;
+        width: 100%;
+        margin: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        
+        z-index: 0;
+      }
+
+      figure p {
+        text-align: center;
+        /* padding: .5rem; */
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        /* bottom:50% */
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-size: 2rem;
+        font-weight: 800;
+        /* font-family: NewYorker; */
+        color: #000;
+      }
+
+      .step {
+        background-color: #000;
+        color: #fff;
+        margin: 0 auto 20em auto;
+
+      } 
+      .step1 {
+        background-color: #000;
+        color: #fff;
+        margin: 0 auto 20em auto;
+
+      } 
+      .step2 {
+        background-color: #000;
+        color: #fff;
+        margin: 0 auto 20em auto;
+
+      }
+      .step2 p {
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step.is-active {
+        background-color: 	#9c0f0f;
+        color: #FFF;
+      }
+
+      .step p {
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.5rem;
+      }
+/*       
+  #aldgate{
+    margin-bottom: 0;
+  } */
+/*   
+   #nomargin{
+    margin-bottom: 300px;
+  }  */
+  #temporal{
+    margin-top: 500px;
+    margin-bottom: 300px;
+  }
+  #had{
+    margin-bottom: 0;
+  }
+  #td{
+    margin-bottom: 0;
+  }
+
+.image-row {
+    margin-top: 0em;
+    margin-bottom: 5em;
+    height: auto;
+}
+
+ .img-block {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100vw;
+    height: 100%;
+}
+.img-block2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100vw;
+    height: 100%;
+}
+
+.img-block img {
+    width: 100%;
+    height: auto;
+}
+
+
+.img-block2 img {
+    width: 100%;
+    height: 500px;
+}
+p.image-center {
+    margin-top: 1em;
+    margin-bottom: 12em;
+    height: 100% !important;
+    width: 100%;
+}
+
+.img-center-inner {
+    max-width: 1000px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-center-inner img {
+    width: 100%;
+}
+.step > div {
+    background: rgba(0,0,0,0.85);
+
+}
+.internalimage{
+  height: 300px;
+  width: 50%;
+  margin: auto;
+}
+.header {
+      background-image: url('walls.jpg'); /* Replace 'your-background-image-url.jpg' with the actual path to your background image */
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      padding: 100px 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .header h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+    .icon {
+    width:100%;
+    height:100%;
+    background-image: url('icon.png'); /* Set the path to your icon PNG */
+    background-size: cover; /* Adjust background size as needed */
+}
+.full-width-div {
+    width: 100%; /* Fill the entire width of the webpage */
+    height: 275vh; /* Take up considerable height, 80% of the viewport height */
+    background-color: #000; /* Set background color as needed */
+    /* Add other styles as needed */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+.full-width-div2 {
+    width: 100%; /* Fill the entire width of the webpage */
+    height: 75vh; /* Take up considerable height, 80% of the viewport height */
+    background-color: #9c0f0f; /* Set background color as needed */
+    /* Add other styles as needed */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+.full-width-div3 {
+    width: 100%; /* Fill the entire width of the webpage */
+    height: 120vh; /* Take up considerable height, 80% of the viewport height */
+    background-color: rgb(0, 0, 0); /* Set background color as needed */
+    /* Add other styles as needed */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+#enddiv{
+  height:80vh;
+  width: 100%; /* Fill the entire width of the webpage */
+    
+    background-color: rgb(0, 0, 0); /* Set background color as needed */
+    /* Add other styles as needed */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+}
+/* #woolwichfinal{
+    margin-bottom: 0;
+  } */
+#enddiv{
+  height: 100vh;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+#credits{
+  height:30vh;
+  margin-top: 0;
+  border-top:1px solid white;
+  justify-content: center;
+    flex-direction: column;
+    /* display: flex; */
+}
+li{
+  font-family: NewYorker;
+  font-size: 20px;
+}
+
+
+.full-width-div p{
+  margin-bottom: 25px; /* Add margin between paragraphs */
+  margin-top: 25px;
+  margin-left: 100px;
+  margin-right: 100px;
+  color: #FFF;
+}
+.full-width-div2 p{
+  margin-bottom: 25px; /* Add margin between paragraphs */
+  margin-top: 25px;
+  margin-left: 100px;
+  margin-right: 100px;
+  color: #FFF;
+}
+.full-width-div3 p{
+  margin-bottom: 25px; /* Add margin between paragraphs */
+  margin-top: 25px;
+  margin-left: 100px;
+  margin-right: 100px;
+  color: #FFF;
+}
+/* Clear floats after the columns */
+.row {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+p{
+  font-family: Baskerville;
+}
+#news{
+  margin-top: 0;
+  margin-bottom: 500px;
+}
+#steppy{
+  margin-bottom: 0;
+}
+    </style>
+  </head>
+  <header class="header">
+    <h1 style="font-family:NewYorker; text-shadow: 2px 2px 2px #000;">The Invisible Walls of Yale's Campus</h1>
+    <h2 style="font-family:NewYorker; text-shadow: 2px 2px 2px #000;">Pranava Dhar</h2>
+  </header>
+  <body>
+    <main>
+     
+    
+      <div class="full-width-div">
+
+     <p> For fourteen years, I attended school within the confines of the same closed campus — Delhi Public School, Noida, a private school in India. A red-brick wall ran around the entire school, with five gates of entry protected by armed security.   </p>  
+            
+            <!-- Add more paragraphs as needed -->
+            <br>
+            
+          <img src="school.png" alt="Image" style="height: 400px; margin:0 auto 0 auto;">
+          <p>This wall was fortified with glass shards and barbed wire — quintessential examples of hostile architecture for security. </p>
+            
+           
+        
+          <img src="shard.jpeg" alt="Image" style="height: 300px; width: 700px; margin:0 auto 0 auto;">
+          <br>
+        <p>When I came to America for university, I was pleasantly surprised! <br>At first blush, Yale's campus in New Haven, Connecticut seemed the exact opposite of my school: a loose collection of buildings integrated with the city around it. No boundaries and no exclusion. </p>
+          <p> I could sense this in the campus map courtesy of the university:</p>
+<center><iframe width="500" height="300" src="https://api.maptiler.com/tiles/cb64e09b-ff24-4241-97bc-15c7b928e341/?key=oVO9BtNrZ3mbml3ObjsC#15.3/41.31090/-72.93120"></iframe></center>
+
+<p> <p>	Yet, over time, I have found the walls of a closed (or closing) campus at Yale too.</p> 
+<p>I haven't come across anything in the vein of the glass shards or barbed wire of my school. <br><br> However, I have realized some implicit and unconscious boundaries around Yale that keep New Haveners out and Yalies in. </p> 
+  
+  	</p>
+
+    
+          </div>
+      <div class="full-width-div2">
+        <center>
+          <p> 
+            To understand these implicit boundaries, one must consider Yale's fraught history of relations with New Haven.
+          </p>
+          <p> 
+            Take for instance, how Yale's official stance on New Haven has changed over time...
+          </p>
+     
+      </center>
+
+        </div>
+    
+
+
+      <section id="scrolly">
+        <article>
+          <div class="step person" data-step="B" id="td">
+            <p>Timothy Dwight V</p>
+            <p>12th President of Yale, 1886-1899</p>
+          <center>     <img style="height:80vh;" src="td4.jpeg"></center>  
+          </div>
+          <!-- <div class="step person" data-step="B" id="had">
+            <p>Arthur Twining Hadley</p>
+            <p>13th President of Yale, 1899-1921</p>
+          <center>     <img style="height:80vh;" src="had.jpeg"></center>  
+          </div> -->
+          <div class="step person" data-step="C" id="pete">
+            <p>Peter Salovey</p>
+            <p>23rd President of Yale, 2013-2024</p>
+     <center>     <img  style="height:80vh;" src="pete.png"></center>  
+          </div>
+          
+        </article>
+
+        <figure>
+          <div class="icon"><p>This is some text</p>
+          </div>
+        </figure>
+      </section>
+
+      <div class="full-width-div3">
+
+          <p> 
+            Beyond the official rhetoric, New Haveners have been a long-standing bogeymen (imagined or not) for Yale students and affiliates. Consider the leaflets handed to first-years of the class of 2027 as they moved into college by the 'Yale Benevolent Police Association':
+          </p>
+
+          <img src="grim.jpeg" alt="Image" style="height: 300px; margin:0 auto 0 auto;">
+     
+          <p> 
+            I have heard many a Yale undergrad complain with similar fervor about New Haven being an "unsafe city." For these friends of mine, their fears manifest in an avoidance of most things New Haven. 
+          </p>
+          <p>
+            The so-called "Yale bubble" is thus made out of a refuge: a place where you are overwhelmingly likely to only see fellow Yale students and not the <i>other.</i>
+          </p>
+          <p>
+         <i>   I argue </i> that Yale's policies accentuate this bubble by disorienting those who venture within its borders.
+          </p>
+     
+  
+
+        </div> 
+	  <section id="scrolly2">
+      <figure>
+        <div id="map"></div>
+          </figure>
+        <article>
+          <div id="baker" class="step active stepdiv" data-step="1">
+            <p>Yale's undergrads live in <span style="color:#d0c6fb">residential colleges</span>, each of which can only be accessed with a Yale ID. <br>This digitized system was implemented in the 90s, following a rise in crime and the high-profile murder of Yale student Christian Prince.</p>
+          </div>
+<div class="step stepdiv"><img src="yaleid.png" style="width:100%;"> </div>
+
+      <div id="nomargin" class="step stepdiv">   <p>These are, by definition, areas of safety, where any outsiders are considered unwelcome.</p> </div>
+          <div  class="step stepdiv" data-step="2">
+            <div id="baker2" class="step active stepdiv" data-step="1">
+             </div>
+            <p>But there are some Yale properties that New Haveners (and anyone else for that matter) can walk into, experience, and attend public events. <br> These include Yale's historic Old Campus and the Sterling Memorial Library - two of Yale's most iconic architectural sights.</p>
+          </div>
+          <div id="aldgate" class="step stepdiv" data-step="2">
+           
+          </div>
+          <div id="ocsterling" class="step image-row" data-step="2">
+            <div class="img-block" style="margin-left: 0px;">
+                <img src="oc.jpg" title="Burning Man Festival" alt="Burning Man Festival">
+                <img src="sterling.jpg" title="Ain Sokhna, Egypt" alt="Ain Sokhna, Egypt">
+                <img src="oc2.jpg" title="Momotombo volcano, Nicaragua" alt="Momotombo volcano, Nicaragua">
+                <img src="sterling2.jpg" title="The Earthstone Fire near Sparks, Nevada" alt="The Earthstone Fire near Sparks, Nevada">
+            </div>
+        </div>
+        <div  class="step stepdiv" data-step="3">
+          <p>But their seeming openness becomes a source of temporal disorientation for everyone but Yale students. <br> 
+           After 6PM, the previously open Sterling library suddenly requires a Yale ID to study inside. <br> Likewise, the gates of Old Campus slam shut in the evening. </p>
+        </div>
+        <div id="temporal" class="step stepdiv" data-step="3"></div>
+        <div class="step stepdiv" data-step="4">
+          <p>Being affiliated with Yale thus becomes necessary to even exist in seemingly "public" spaces. <br> 
+          </p>
+        </div>
+          <div class="step stepdiv" data-step="4">
+            <p>A similar need for being Yale-affiliated to exist at Yale manifests itself due to the university's rental practices. <br>
+Yale is the biggest landowner in New Haven. Some of its property is <span style="color:#6ebef7;"> residential</span>, with parts of its portfolio managed by Elm Campus Partners. <br>
+              Here is a snippet of their property in the Park Street district: </p>
+            <center> <img class="internalimage" src="prop.png"></center>
+          </div>
+
+          <div id="london-bridge" class="step stepdiv" data-step="4">
+           
+          </div>
+          <div id="steppy" class="step stepdiv" data-step="2">
+            <p>Critically, Yale's policy is that only its affiliates can lease from the university. As Yale acquires more property around campus, this means non-Yale tenants are actively pushed out of their homes by the university.</p>
+           
+            </div>
+            <div id="news" class="step stepdiv"><img style="width:100%;" src="ten2.png"></div>
+            
+
+          <div  class="step stepdiv" data-step="5">
+            <p>One can observe this aversion to non-Yalies on Yale's campus in Yale's encroachment and development of seemingly public land. <br> 
+             Take, for instance, the junction of High Street and Wall Street, which was purchased by Yale from the City of New Haven and turned into a pedestrian-only walkway.</p>
+          </div>
+
+
+          <div  id="woolwich" class="step stepdiv" data-step="5">
+            </div>
+          <div style="margin-bottom: 400px;" class="step image-row" data-step="2">
+            <div class="img-block2" style="margin-left: 0px;">
+                <img src="high.png" title="Burning Man Festival" alt="Burning Man Festival">
+                <img src="high2.jpeg" title="Ain Sokhna, Egypt" alt="Ain Sokhna, Egypt">
+                <img src="alexander.png" title="Momotombo volcano, Nicaragua" alt="Momotombo volcano, Nicaragua">
+                <img src="alexander2.jpeg" title="The Earthstone Fire near Sparks, Nevada" alt="The Earthstone Fire near Sparks, Nevada">
+            </div>
+        </div>
+          <div  class="step stepdiv" data-step="4">
+            <p> Per Yale, this landscape project was explicitly aimed to convert these streets "from an urban streetscape to a lush and tidy campus landscape." <br>
+              What this means in practice is that only those who can walk are the ones who can inhabit this space, pushing out drivers. <br> And when the property around campus is only rented to Yale-affiliates, who does the walkway welcome?</p>
+          </div>
+          <div class="step stepdiv" data-step="4">
+            <p> In 2021, Yale signed a deal with the City of New Haven to further develop the North Section of High Street and "fully pedestrianize the street." <br>
+            The High Street project is scheduled to be completed during the 2025 academic year. </p>
+          </div>
+          <div  id="woolhigh" class="step stepdiv" data-step="4"></div>
+
+          <div   class="step stepdiv" data-step="5">
+            <p>When asked about the university's plans, Peter Salovey said: "It’s time to make that a beautiful entryway to the campus for everyone — the campus community, the New Haven community and visitors from faraway places.” Are they all welcome?</p>
+          </div>
+          <div  id="woolwichfinal" class="step stepdiv" data-step="5">
+           </div>
+          <div  style="margin-bottom:0;" class="step stepdiv" data-step="5">
+             </div>
+           
+
+
+        <div id="enddiv" class="step2 stepdiv">
+           
+          <p>Yale's campus may lack the physical barriers of my school experience, but it still manages to perpetuates a sense of exclusivity through its implicit and unconscious boundaries. <br>
+            Despite the rhetoric of inclusivity, Yale's practices, from restricted access to public spaces to the eviction of non-affiliates, contribute to the feeling of a closed campus. <br>
+            <p> At the end of the day, this closed campus and its exclusion of New Haveners may be just another symptom of the thirst for exclusivity at Yale, be it <a href="https://yaledailynews.com/blog/2023/12/14/yale-admits-9-02-percent-of-early-applicants-marking-lowest-early-admit-rate-in-more-than-two-decades/">admissions</a>, <a href="https://www.theatlantic.com/ideas/archive/2023/09/yale-college-undergrad-clubs-competitive/675219/">clubs,</a> or <a href="https://www.theatlantic.com/ideas/archive/2024/01/yale-skull-and-bones-secret-societies-diversity/677030/">senior societies</a>.</p>
+
+            
+                </div>
+          <div id="credits" class="step stepdiv">
+            <p id="creditspara" style="font-family: NewYorker;"> Credits </p>
+          
+
+<ul>
+  <li>Banner, Old Campus, Sterling: Yale Campus Photography Collections</li>
+  <li>StreetView Image Ideas: <a href="https://storymaps.arcgis.com/stories/025768fb942d4e16887521c7ae4a491e">High Street Conversion Project</a></li>
+  <li>Glass Shards: Stock Images</li>
+  <li>Fonts: NewYorker, Baskerville</li>
+  <li>Mapbox Scollytelling Template, Scrollama Side-Scroll, MapTiler</li>
+
+</ul>
+          </p>
+          </div>
+
+        </article>
+        <!-- <figure>
+          <div id="map"></div>
+            </figure> -->
+    
+      </section>
+    
+    
+
+
+    </main>
+
+    <!-- <div class='debug'></div> -->
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.0.4/scrollama.min.js"></script>
+	    <script>
+      
+ 	mapboxgl.accessToken = 'pk.eyJ1IjoicHJhbmF2YWRoYXIiLCJhIjoiY2x0ZzR4Znd1MTAxNjJqcG1wN25ycDdqMSJ9.LJulMBupGQQ5pGT3R4JmMQ';
+    const map = new mapboxgl.Map({
+        style: "mapbox://styles/pranavadhar/cltv4j9tw00n901p413418sdu",
+		container: 'map', // container ID
+        center: [-72.92750, 41.30915], // starting position [lng, lat]
+        zoom: 14, // starting zoom,
+		interactive: false
+    });
+    map.on('load', function() {
+    map.resize()
+});
+
+      // using d3 for convenience
+      var main = d3.select("main");
+      var scrolly = main.select("#scrolly");
+      var figure = scrolly.select("figure");
+      var article = scrolly.select("article");
+      var step = article.selectAll(".step");
+
+	  var scrolly2 = main.select("#scrolly2");
+      var figure2 = scrolly2.select("figure");
+      var article2 = scrolly2.select("article");
+      var step2 = article2.selectAll(".step");
+
+      // initialize the scrollama
+      var scroller = scrollama();
+	  var scroller2 = scrollama();
+
+      // generic window resize listener event
+      function handleResize() {
+        // 1. update height of step elements
+        var stepH = Math.floor(window.innerHeight * 0.75);
+        step.style("height", 100 + "vh");
+
+        var figureHeight = window.innerHeight / 2 + 200;
+        var figureMarginTop =0;
+
+        figure
+          .style("height", figureHeight + "px")
+          .style("top", figureMarginTop + "px");
+
+        // 3. tell scrollama to update new element dimensions
+        scroller.resize();
+      }
+
+      // scrollama event handlers
+      function handleStepEnter(response) {
+        // console.log(response);
+        // var response = {element, direction, index };
+        // var activeStepId = element.id; 
+
+        // add color to current step only
+        
+        step.classed("is-active", function(d, i) {
+          return i === response.index;
+        });
+  
+        switch (response.index) {
+        case 0:
+            figure.select("p").text("\"The great quadrangle [Yale's Campus] should look inward, not outward, and the College life, so to speak, must find its center within its own borders.\"");  
+          // Actions for step 1
+            break;
+        case 1:
+            figure.select("p").text("\"Yale loves New Haven. As a general rule, we want the public to enjoy our campus.\"");  
+            break;
+    }
+        // update graphic based on step
+        
+        
+        
+        // console.log(respone.index, step)
+      }
+
+      function setupStickyfill() {
+        d3.selectAll(".sticky").each(function() {
+          Stickyfill.add(this);
+        });
+      }
+	  function handleResize2() {
+        // 1. update height of step elements
+        var stepH = Math.floor(window.innerHeight * 0.75);
+        // step2.style("height", stepH + "px");
+
+        var figureHeight = window.innerHeight;
+        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+        figure2
+          .style("height", "100vh")
+          .style("top", figureMarginTop + "px");
+
+        // 3. tell scrollama to update new element dimensions
+        scroller2.resize();
+      }
+
+      // scrollama event handlers
+      function handleStepEnter2(response) {
+        console.log(response);
+        // response = { element, direction, index }
+
+        // add color to current step only
+        step2.classed("is-active", function(d, i) {
+          return i === response.index;
+        });
+
+        // update graphic based on step
+        figure2.select("p").text(response.index + 1);
+      }
+
+      function setupStickyfill2() {
+        d3.selectAll(".sticky").each(function() {
+          Stickyfill.add(this);
+        });
+      }
+
+      function init() {
+        setupStickyfill();
+
+        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+        handleResize();
+		handleResize2();
+
+        // 2. setup the scroller passing options
+        // 		this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller
+          .setup({
+            step: "#scrolly article .step",
+            offset: 0.33,
+            debug: false
+          })
+          .onStepEnter(handleStepEnter);
+		scroller2
+          .setup({
+            step: "#scrolly2 article .step",
+            debug: false
+          })
+          .onStepEnter(handleStepEnter2);
+
+
+
+        // setup resize event
+        window.addEventListener("resize", handleResize);
+      }
+
+      // kick things off
+      init();
+
+
+	  const chapters = {
+        'baker': {
+            bearing: 27,
+            center: [-72.92750, 41.30915],
+            zoom: 14,
+            // pitch: 20
+			},
+      'baker2': {
+            bearing: 27,
+            center: [-72.92750, 41.30915],
+            zoom: 14,
+            // pitch: 20
+			},
+        'aldgate': {
+            duration: 2000,
+            center: [-72.92750, 41.30915],
+            // bearing: 150,
+            zoom: 16,
+            // pitch: 0
+        }, 
+        'temporal': {
+            duration: 6000,
+            center: [-72.92750, 41.30915],
+            // bearing: 150,
+            zoom: 15,
+            // pitch: 0
+        },
+        'london-bridge': {
+            bearing: 90,
+            center: [-72.931138, 41.3118869],
+            zoom: 16,
+            // speed: 0.6,
+            // pitch: 40
+        },
+        'woolwich': {
+            bearing: 90,
+            center: [-72.9287422, 41.31158],
+            zoom: 16
+        },
+        'news': {
+            bearing: 90,
+            center: [-72.931138, 41.3118869],
+            zoom: 16,
+        },
+        'woolhigh': {
+          duration: 1000,
+            bearing: 90,
+            center: [-72.9287422, 41.31158],
+            zoom: 16
+        },
+        'woolwichfinal': {
+            bearing: 60,
+            center: [-72.931138, 41.3118869],
+            zoom: 15
+        }
+
+    };
+
+    let activeChapterName = 'baker';
+    function setActiveChapter(chapterName) {
+        // if (chapterName === activeChapterName) return;
+		
+	console.log(map.getStyle().layers);
+
+        map.flyTo(chapters[chapterName]);
+
+        document.getElementById(chapterName).classList.add('active');
+        document.getElementById(activeChapterName).classList.remove('active');
+
+        activeChapterName = chapterName;
+		if (activeChapterName == 'baker'){
+			console.log("yooho2o");
+			map.setPaintProperty('resco', 'fill-opacity', .6);
+
+
+		}
+    if (activeChapterName == 'baker2'){
+			console.log("yooho2o");
+			map.setPaintProperty('resco', 'fill-color', '#e54a34');
+
+
+		}
+		if (activeChapterName == 'aldgate'){
+			console.log("yoohoo");
+			map.setPaintProperty('time2', 'fill-opacity', .6);
+
+		}
+		if (activeChapterName == 'london-bridge'){
+			console.log("yoohoo3");
+			map.setPaintProperty('rents', 'fill-opacity', .6);
+
+		}
+    if (activeChapterName == 'news'){
+			console.log("yoohoo3");
+      map.setPaintProperty('rents', 'fill-color', '#e54a34');
+		}
+		if (activeChapterName == 'woolwich'){
+			console.log("y4oohoo3");
+			map.setLayoutProperty('road-simple', 'visibility', 'none');
+			map.setPaintProperty('rents', 'fill-opacity', 0);
+			map.setPaintProperty('time2', 'fill-opacity', 0);
+			map.setPaintProperty('resco', 'fill-opacity', 0);
+      map.setPaintProperty('vehicle', 'fill-opacity', .6);
+
+			
+
+		}
+    if (activeChapterName == 'woolhigh'){
+
+      map.setPaintProperty('vehiclefuture', 'fill-opacity', .6);
+
+			
+
+		}
+    if (activeChapterName == 'temporal'){
+			console.log("yoohootemp");
+			map.setPaintProperty('time2', 'fill-color', '#e54a34');
+
+		}
+    if (activeChapterName == 'woolwichfinal'){
+        console.log("yoohootemp");
+        map.setPaintProperty('vehiclefuture', 'fill-color', '#e54a34');
+        map.setPaintProperty('vehicle', 'fill-color', '#e54a34');
+        map.setPaintProperty('rents', 'fill-color', '#e54a34');
+        map.setPaintProperty('time2', 'fill-color', '#e54a34');
+        map.setPaintProperty('resco', 'fill-color', '#e54a34');
+        map.setPaintProperty('rents', 'fill-opacity', .6);
+        map.setPaintProperty('time2', 'fill-opacity', .6);
+        map.setPaintProperty('resco', 'fill-opacity', .6);
+        map.setPaintProperty('vehicle', 'fill-opacity', .6);
+
+
+		}
+
+    }
+
+    function isElementOnScreen(id) {
+        const element = document.getElementById(id);
+        const bounds = element.getBoundingClientRect();
+        return bounds.top < window.innerHeight && bounds.bottom > 0;
+    }
+
+    // On every scroll event, check which element is on screen
+    window.onscroll = () => {
+        for (const chapterName in chapters) {
+            if (isElementOnScreen(chapterName)) {
+                setActiveChapter(chapterName);
+                break;
+            }
+        }
+    };
+
+
+
+    </script>
+  </body>
+</html>
